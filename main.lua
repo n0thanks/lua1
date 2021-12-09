@@ -20,13 +20,17 @@ Dictionary = read_file("data-files/dictionary.txt")
 AliceWords = read_file("data-files/AliceInWonderLand.txt")
 
 -- Print first 50 values of each array to verify contents
-print("***DICTIONARY***")
-print_array(Dictionary, 1, 50)
-print("***ALICEWORDS***")
-print_array(AliceWords, 1, 50)
+-- print("***DICTIONARY***")
+-- print_array(Dictionary, 1, 50)
+-- print("***ALICEWORDS***")
+-- print_array(AliceWords, 1, 50)
 
 function LinearSearch(anArray, item)
-    for i = 1, #anArray do if anArray[i] == item then return i end end
+    for i = 1, #anArray do 
+        if anArray[i] == item then 
+            return i
+        end 
+    end
     return -1
 end
 
@@ -89,28 +93,30 @@ while true do
         io.write("Spell Check Alice Linear\n")
         local startTime = os.time()
         local count = 0
-        local index = LinearSearch(Dictionary, AliceWords.lowercase)
         for i = 1, #AliceWords do
-            if index[i] == -1 then
+            local index = LinearSearch(Dictionary, AliceWords[i]:lower())
+            if index == -1 then
                 count = count + 1
+            end
         end
         io.write("Number of words not found in dictionary: ", count, " (")
         local endTime = os.time()
         io.write(os.difftime(endTime, startTime), " seconds)\n")
-    end
+        
     elseif selection == "4" then
         io.write("Spell Check Alice Binary\n")
         local startTime = os.time()
         local count = 0
-        local index = BinarySearch(Dictionary, AliceWords.lowercase)
         for i = 1, #AliceWords do
-            if index[i] == -1 then
+            local index = BinarySearch(Dictionary, AliceWords[i]:lower())
+            if index == -1 then
                 count = count + 1
+            end
         end
         io.write("Number of words not found in dictionary: ", count, " (")
         local endTime = os.time()
         io.write(os.difftime(endTime, startTime), " seconds)\n")
-    end
+        
     elseif selection == "5" then
         io.write("Program Terminated")
         os.exit()
